@@ -4,6 +4,15 @@
     using UnityEngine;
 
     /// <summary>
+    /// Interface for targets that can be hit
+    /// </summary>
+    public interface IHitable : ITarget
+    {
+        public float Health { get; }
+        void Hit(ITargetter targetter);
+    }
+
+    /// <summary>
     /// Base class for units that can be targetted.
     /// </summary>
     public abstract class TargettableUnit : TargettingUnit, IHitable

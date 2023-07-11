@@ -26,7 +26,6 @@ namespace Pool.Startup
 
             Sequence initSceneSequence = DOTween.Sequence()
                 .AppendInterval(.5f)
-                //.Append(logo.DOAnchorPos(Vector2.zero, .5f).SetEase(Ease.OutElastic))
                 .Append(logo.DOScale(1, .5f).SetEase(Ease.OutBack))
                 .Join(logo.DORotateQuaternion(Quaternion.identity, .5f).SetEase(Ease.OutExpo))
                 .AppendInterval(.5f)

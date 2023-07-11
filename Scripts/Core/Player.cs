@@ -38,10 +38,13 @@ namespace Defense
         [SerializeField] private List<Unit> units;
         public List<Unit> Units => units;
 
-
         [SerializeField] private Floor floor;
         private Queue<Unit> unitsToDestroy = new Queue<Unit>();
 
+        /// <summary>
+        /// Sets up enemies, existing units and initializes target provider
+        /// </summary>
+        /// <param name="enemies"></param>
         public void Initialize(List<Player> enemies)
         {
             this.enemies = enemies;
@@ -89,6 +92,9 @@ namespace Defense
             }
         }
 
+        /// <summary>
+        /// Resets targets for all units that can acquire target
+        /// </summary>
         private void ResetTargettingUnit()
         {
             var targettingUnits = units.OfType<ITargetter>().ToList();
@@ -97,6 +103,7 @@ namespace Defense
 
         private void LateUpdate()
         {
+            // Destroy units at the end of frame
             while (unitsToDestroy.Count > 0)
             {
                 Destroy(unitsToDestroy.Dequeue().gameObject);

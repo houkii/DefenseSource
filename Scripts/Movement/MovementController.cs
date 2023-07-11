@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Defense
 {
     /// <summary>
-    /// Temporary axis based movement control
+    /// Temporary axis based movement control for player
     /// </summary>
     public class MovementController : MonoBehaviour
     {

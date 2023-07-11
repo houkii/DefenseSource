@@ -13,8 +13,6 @@ namespace Defense
         [SerializeField] private float retargetRange = 8;
         [SerializeField] private float noTargetTime = 5f;   // Time projectile will live without a target
         private Vector3 currentDirection;
-
-
         private float noTargetTimeElapsed = 0f;
 
         protected override void Awake()

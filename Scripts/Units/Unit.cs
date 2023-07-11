@@ -10,6 +10,32 @@
         IUnit Owner { get; set; }
     }
 
+    public struct DestructionData
+    {
+        public IPlayer killer;
+        public DestructionType type;
+    }
+
+    public enum DestructionType
+    {
+        Destroy,
+        Capture
+    }
+
+    public enum UnitType
+    {
+        WalkingUnit,
+        Building,
+        Turret,
+        MovingTurret,
+        Alien1,
+        Soldier1,
+        Robot1,
+        SpaceShip1,
+        SpaceShip2,
+        ArmoredSoldier
+    }
+
     /// <summary>
     /// Base unit class.
     /// </summary>
@@ -78,29 +104,4 @@
         }
     }
 
-    public struct DestructionData
-    {
-        public IPlayer killer;
-        public DestructionType type;
-    }
-
-    public enum DestructionType
-    {
-        Destroy,
-        Capture
-    }
-
-    public enum UnitType
-    {
-        WalkingUnit,
-        Building,
-        Turret,
-        MovingTurret,
-        Alien1,
-        Soldier1,
-        Robot1,
-        SpaceShip1,
-        SpaceShip2,
-        ArmoredSoldier
-    }
 }

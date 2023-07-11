@@ -20,7 +20,7 @@ namespace Defense
 
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (turret.Target.IsRealTarget)
             {

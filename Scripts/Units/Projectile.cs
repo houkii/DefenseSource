@@ -33,11 +33,19 @@ namespace Defense
             SetTarget(new NullTarget());
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (Target.IsRealTarget)
             {
                 transform.position += (Target.GetPosition() - transform.position).normalized * speed * Time.deltaTime;
+            }
+            else
+            {
+                Kill(new DestructionData
+                {
+                    killer = Player,
+                    type = DestructionType.Destroy
+                });
             }
         }
     }

@@ -35,7 +35,7 @@ namespace Defense
         protected virtual void FixedUpdate()
         {
             // dont move when fighting - only rb related forces move obj
-            // (which they shouldn't by the way - todo)
+            // (which they shouldn't i think by the way - todo)
             if (!isFighting)
             {
                 mover.Move(Target, Time.fixedDeltaTime);

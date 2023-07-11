@@ -30,12 +30,11 @@ namespace Defense
         {
             if (unit is RangedUnit)
             {
-                var turret = (unit as RangedUnit);
-                AddIndicator(new IndicatorEntry(turret.transform, turret.Range));
+                var rangedUnit = (unit as RangedUnit);
+                AddIndicator(new IndicatorEntry(rangedUnit.transform, rangedUnit.Range));
             }
             else if (!(unit is Projectile))
             {
-                //var size = unit.GetComponent<MeshFilter>().mesh.bounds.size;
                 var size = unit.transform.localScale;
                 var unitSize = Mathf.Max(size.x, size.y) * Mathf.Max(unit.transform.localScale.x, unit.transform.localScale.z);
                 AddIndicator(new IndicatorEntry(unit.transform, indicatorScaler * unitSize));

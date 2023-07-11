@@ -47,7 +47,7 @@ namespace Defense
             // Add UI vies to specified objects (should move to config)
             if (unit is Building || unit is RangedUnit)
             {
-                var hitableUnit = (unit as TargettableUnit);
+                var hitableUnit = (unit as IHitable);
                 entityViews.AddView(unit.gameObject, () => hitableUnit.Health);
                 //hitableUnit.OnTargetHit += (hitInfo) => hitIndicators.AddView(hitableUnit.transform.position, $"-{Mathf.RoundToInt(hitInfo.damage * 10)}");
             }

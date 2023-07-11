@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Defense
 {
     /// <summary>
-    /// IK controller for unit groups
+    /// test IK controller for unit groups
     /// </summary>
     public class IKController : MonoBehaviour
     {

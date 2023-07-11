@@ -1,6 +1,29 @@
 ﻿namespace Defense
 {
     /// <summary>
+    /// Data that is passed from hitting to damaged unit when damage is applied.
+    /// </summary>
+    public struct HitInfo
+    {
+        public IPlayer player;
+        public ITargetter owner;
+        public float damage;
+    }
+
+    /// <summary>
+    /// Basic interface for targetter - entity that can acquire target.
+    /// </summary>
+    public interface ITargetter
+    {
+        ITargetter Parent { get; }
+        ITarget Target { get; }
+        void SetTarget(ITarget target);
+        void SetParent(ITargetter targetter);
+        void ResetTarget();
+        HitInfo GetHitInfo();
+    }
+
+    /// <summary>
     /// Base class for units that can acquire target.
     /// </summary>
     public abstract class TargettingUnit : Unit, ITargetter
