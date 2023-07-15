@@ -52,26 +52,22 @@ namespace Defense
             CanBeTargeted = true;
             this.Parent = this;
             shootCoroutine = StartCoroutine(DOShoot());
+            Target = new NullTarget();
         }
 
         public override void ResetTarget()
         {
+            base.ResetTarget();
             if(shootCoroutine != null)
             {
                 StopCoroutine(shootCoroutine);
             }
-
-            Target = new NullTarget();
             shootCoroutine = StartCoroutine(DOShoot());
         }
 
-        protected virtual void Update()
+        protected override void Update()
         {
-            if (state == TurretState.Idle)
-            {
-                Target = Utils.GetTarget(Player.targetProvider.Targets, transform.position, SearchRange);
-            }
-
+            base.Update();
             if (HasTarget())
             {
                 Aim();

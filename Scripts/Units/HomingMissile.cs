@@ -29,7 +29,7 @@ namespace Defense
             }
         }
 
-        private void Update()
+        protected override void Update()
         {
             if (Target.IsRealTarget)
             {

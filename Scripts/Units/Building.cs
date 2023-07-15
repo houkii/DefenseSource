@@ -5,6 +5,11 @@ namespace Defense
     /// </summary>
     public class Building : TargettableUnit
     {
+        protected override void Awake()
+        {
+            resetTargetEachFrame = false;
+        }
+
         public override HitInfo GetHitInfo()
         {
             return new HitInfo { 

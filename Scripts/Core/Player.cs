@@ -75,7 +75,7 @@ namespace Defense
 
             if (unit is ITarget)
             {
-                enemies.ForEach(x => x.ResetTargettingUnit());
+                enemies.ForEach(x => x.ResetTargettingUnits());
             }
 
             floor.RemoveIndicator(unit);
@@ -95,7 +95,7 @@ namespace Defense
         /// <summary>
         /// Resets targets for all units that can acquire target
         /// </summary>
-        private void ResetTargettingUnit()
+        private void ResetTargettingUnits()
         {
             var targettingUnits = units.OfType<ITargetter>().ToList();
             targettingUnits.ForEach(x => x.ResetTarget());

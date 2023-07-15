@@ -3,7 +3,6 @@ namespace Defense
 {
     using UnityEngine;
 
-
     public interface IMover
     {
         void Move(ITarget target, float delta);

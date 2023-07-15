@@ -1,4 +1,6 @@
-﻿namespace Defense
+﻿using UnityEngine;
+
+namespace Defense
 {
     /// <summary>
     /// Data that is passed from hitting to damaged unit when damage is applied.
@@ -31,6 +33,9 @@
         public ITargetter Parent { get; set; }
         public ITarget Target { get; protected set; } = new NullTarget();
 
+        // Should depend on currently used controller (ai, player, unit type) on targetting object.
+        [SerializeField] protected bool resetTargetEachFrame;
+
         protected virtual void Awake()
         {
             ResetTarget();
@@ -48,7 +53,8 @@
 
         public virtual void ResetTarget()
         {
-            Target = new NullTarget();
+            if (Player != null)
+                Target = Utils.GetTarget(Player.targetProvider.Targets, transform.position, 1000);
         }
 
         public virtual HitInfo GetHitInfo()
@@ -59,6 +65,14 @@
                 owner = this,
                 player = (IPlayer)Player
             };
+        }
+
+        protected virtual void Update()
+        {
+            if(resetTargetEachFrame)
+            {
+                ResetTarget();
+            }
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Defense
             SetTarget(new NullTarget());
         }
 
-        private void Update()
+        protected override void Update()
         {
             if (Target.IsRealTarget)
             {

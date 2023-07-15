@@ -13,12 +13,6 @@ namespace Defense
         private IMover mover;
         private Rigidbody rb;
 
-        public override void ResetTarget()
-        {
-            if(Player != null)
-                Target = Utils.GetTarget(Player.targetProvider.Targets, transform.position, 1000);
-        }
-
         public override HitInfo GetHitInfo()
         {
             return new HitInfo { damage = 1f, owner = this, player = (IPlayer)Player };
@@ -32,8 +26,10 @@ namespace Defense
             mover = gameObject.AddComponent<Mover>();
         }
 
-        protected virtual void Update()
+        protected override void Update()
         {
+            base.Update();
+
             // dont move when fighting - only rb related forces move obj
             // (which they shouldn't i think by the way - todo)
             if (!isFighting)

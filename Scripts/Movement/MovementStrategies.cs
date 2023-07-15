@@ -1,7 +1,7 @@
-using UnityEngine;
-
 namespace Defense
 {
+    using UnityEngine;
+
     public interface IMovementStrategy
     {
         void Move(Vector3 targetPos, float delta, float speed);
@@ -24,6 +24,8 @@ namespace Defense
     public class BasicGroundMovement : IMovementStrategy
     {
         private Transform transform;
+        private Vector3 direction;
+        private Vector3 adjustedTargetPos;
 
         public BasicGroundMovement(Transform transform)
         {
@@ -32,9 +34,8 @@ namespace Defense
 
         public void Move(Vector3 targetPos, float delta, float speed)
         {
-            var rb = transform.GetComponent<Rigidbody>();
-            var adjustedTargetPos = new Vector3(targetPos.x, transform.position.y, targetPos.z);
-            Vector3 direction = (adjustedTargetPos - transform.position).normalized;
+            adjustedTargetPos = new Vector3(targetPos.x, transform.position.y, targetPos.z);
+            direction = (adjustedTargetPos - transform.position).normalized;
             direction = Vector3.Scale(direction, new Vector3(1f, 0f, 1f));
             transform.position += (direction.normalized * speed * delta);
             transform.rotation = Quaternion.LookRotation(direction);
