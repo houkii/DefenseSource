@@ -7,6 +7,7 @@ namespace Defense
     {
         protected override void Awake()
         {
+            base.Awake();
             resetTargetEachFrame = false;
         }
 
