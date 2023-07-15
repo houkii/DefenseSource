@@ -18,8 +18,12 @@ namespace Defense
                 .AsSingle()
                 .NonLazy();
 
-            Container.Bind<EntityViews>().FromComponentsInHierarchy().AsSingle().NonLazy();
-            Container.Bind<HitIndicators>().FromComponentsInHierarchy().AsSingle().NonLazy();
+            Container.Bind<EntityViews>().FromComponentsInHierarchy()
+                .AsSingle()
+                .NonLazy();
+            Container.Bind<HitIndicators>().FromComponentsInHierarchy()
+                .AsSingle()
+                .NonLazy();
 
             Container.BindFactory<UnityEngine.Object, Unit, Unit.Factory>().FromFactory<UnitFactory>();
         }

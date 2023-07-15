@@ -32,13 +32,13 @@ namespace Defense
             mover = gameObject.AddComponent<Mover>();
         }
 
-        protected virtual void FixedUpdate()
+        protected virtual void Update()
         {
             // dont move when fighting - only rb related forces move obj
             // (which they shouldn't i think by the way - todo)
             if (!isFighting)
             {
-                mover.Move(Target, Time.fixedDeltaTime);
+                mover.Move(Target, Time.deltaTime);
             }
         }
 

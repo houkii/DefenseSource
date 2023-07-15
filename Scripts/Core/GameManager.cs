@@ -10,7 +10,6 @@ namespace Defense
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private List<Player> players;
-
         [Inject] private GUI gui;
 
         private void Awake()

@@ -38,12 +38,12 @@
 
         public virtual void SetParent(ITargetter targetter)
         {
-            this.Parent = targetter;
+            Parent = targetter;
         }
 
         public virtual void SetTarget(ITarget target)
         {
-            this.Target = target;
+            Target = target;
         }
 
         public virtual void ResetTarget()
@@ -53,7 +53,12 @@
 
         public virtual HitInfo GetHitInfo()
         {
-            return new HitInfo { damage = 0, owner = this, player = (IPlayer)Player };
+            return new HitInfo 
+            { 
+                damage = 0,
+                owner = this,
+                player = (IPlayer)Player
+            };
         }
     }
 }

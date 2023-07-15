@@ -11,12 +11,11 @@ namespace Defense
     public class MapController : MonoBehaviour
     {
         public GameObject[] prefabs;                 // Array of prefabs to spawn
-        [SerializeField] private float scaler = 4f;
         [SerializeField] private Transform holder;
+        [SerializeField] private float scaler = 4f;
+        [SerializeField] private int rows;
+        [SerializeField] private int columns;
         private Vector3 prefabSize;                  // Size of the prefabs
-        public int rows;                             // Number of rows in the grid
-        public int columns;                          // Number of columns in the grid
-
         private List<GameObject> gridElements;       // List to cache the grid elements
 
         private void OnDestroy()

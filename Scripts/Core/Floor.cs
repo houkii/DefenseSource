@@ -9,13 +9,12 @@ namespace Defense
     /// </summary>
     public class Floor : MonoBehaviour
     {
-        [SerializeField] private RangedUnit[] objectsWithRange;
+        [SerializeField] private float indicatorScaler = 1.4f;
+        private RangedUnit[] objectsWithRange;
         private Material material;
         private List<IndicatorEntry> indicators;
         private int previousFrameIndicatorsCount = 0;
         private int currentFrameIndicatorsCount;
-
-        [SerializeField] private float indicatorScaler = 1.4f;
 
         private void Awake()
         {

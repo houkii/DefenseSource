@@ -16,5 +16,4 @@
             return _container.InstantiatePrefabForComponent<Unit>(prefab);
         }
     }
-
 }

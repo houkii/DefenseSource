@@ -8,6 +8,7 @@
     /// </summary>
     public interface IHitable : ITarget
     {
+        public event Action<HitInfo> OnTargetHit;
         public float Health { get; }
         void Hit(ITargetter targetter);
     }

@@ -15,8 +15,9 @@ namespace Defense
             animator = GetComponentInChildren<Animator>();
         }
 
-        protected virtual void Update()
+        protected override void Update()
         {
+            base.Update();
             animator.SetBool("attacking", this.isFighting);
         }
     }

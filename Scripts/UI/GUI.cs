@@ -10,7 +10,6 @@ namespace Defense
     {
         [SerializeField] private EntityViews entityViews;
         public EntityViews EntityViews => entityViews;
-
         [SerializeField] private TextMeshProUGUI playersInfo;
         [SerializeField] private Button resetButton;
 
@@ -33,7 +32,6 @@ namespace Defense
             }
 
             playersInfo.text = info;
-
         }
 
         private void ResetLevel()

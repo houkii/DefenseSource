@@ -44,12 +44,18 @@ namespace Defense
             var prefab = units.Find(x => x.type == unitType).prefab;
             var unit = unitFactory.Create(prefab);
 
-            // Add UI vies to specified objects (should move to config)
-            if (unit is Building || unit is RangedUnit)
+            if (unit is TargettableUnit)
             {
-                var hitableUnit = (unit as IHitable);
-                entityViews.AddView(unit.gameObject, () => hitableUnit.Health);
-                //hitableUnit.OnTargetHit += (hitInfo) => hitIndicators.AddView(hitableUnit.transform.position, $"-{Mathf.RoundToInt(hitInfo.damage * 10)}");
+                var targettableUnit = (unit as TargettableUnit);
+
+                // Add health indicator.
+                entityViews.AddView(unit.gameObject, () => targettableUnit.Health);
+
+                // Spawn hit info.
+                targettableUnit.OnTargetHit += (hitInfo) => hitIndicators.AddView(
+                    targettableUnit.transform.position, 
+                    $"-{Mathf.RoundToInt(hitInfo.damage * 10)}"
+                );
             }
 
             return unit;

@@ -9,7 +9,6 @@ namespace Defense
     {
         [SerializeField] private float moveSpeed = 5f;
         [SerializeField] private float rotSpeed = 10f;
-
         private Vector3 moveDirection;
 
         private void Update()

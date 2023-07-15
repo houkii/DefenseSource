@@ -26,21 +26,24 @@ namespace Defense
         public float Range => range;
         public float SearchRange => searchRange;
         public bool HasTarget() => Target.IsRealTarget;
-        public TurretState state = TurretState.Idle;
-        public WeaponState weaponState = WeaponState.Ready;
         public ITargetProvider targetProvider;
-        public uint ammoCount = 10;
-        public float reloadTime = .5f;
 
+        // objects to attach
         [SerializeField] private GameObject projectilePrefab;
         [SerializeField] private GameManager gameManager;
         [SerializeField] private GameObject tower;
         [SerializeField] private GameObject barrel;
         [SerializeField] private Transform projectileSpawnPoint;
         [SerializeField] private ParticleSystem firePS;
+
+        // object data
+        [SerializeField] private TurretState state = TurretState.Idle;
+        [SerializeField] private WeaponState weaponState = WeaponState.Ready;
         [SerializeField] private float range = 100f;
         [SerializeField] private float searchRange = 100f;
         [SerializeField] private float rotationSpeed = 10f;
+        [SerializeField] private int ammoCount = 10;
+        [SerializeField] private float reloadTime = .5f;
         private Coroutine shootCoroutine;
 
         protected override void Awake()
@@ -96,6 +99,23 @@ namespace Defense
             Quaternion targetBarrelRotation = Quaternion.Euler(angle, 0, 0);
 
             // Apply rotations
+            SetTowerRotations(targetTowerRotation, targetBarrelRotation);
+
+            // Lock target when rotation matches target rotation
+            HandleTargetLock(targetTowerRotation);
+        }
+
+        private void HandleTargetLock(Quaternion targetTowerRotation)
+        {
+            var dotProduct = Quaternion.Dot(tower.transform.rotation.normalized, targetTowerRotation.normalized);
+            if (Mathf.Abs(dotProduct) > .999f && Vector3.Distance(transform.position, Target.GetPosition()) < Range)
+            {
+                state = TurretState.TargetLocked;
+            }
+        }
+
+        private void SetTowerRotations(Quaternion targetTowerRotation, Quaternion targetBarrelRotation)
+        {
             tower.transform.rotation = Quaternion.Lerp(
                 tower.transform.rotation,
                 targetTowerRotation,
@@ -107,13 +127,6 @@ namespace Defense
                 targetBarrelRotation,
                 Time.deltaTime * rotationSpeed
             );
-
-            // Lock target when rotation matches target rotation
-            var dotProduct = Quaternion.Dot(tower.transform.rotation.normalized, targetTowerRotation.normalized);
-            if (Mathf.Abs(dotProduct) > .999f && Vector3.Distance(transform.position, Target.GetPosition()) < Range)
-            {
-                state = TurretState.TargetLocked;
-            }
         }
 
         /// <summary>
@@ -122,11 +135,19 @@ namespace Defense
         /// <param name="target"></param>
         private void Shoot(ITarget target)
         {
+            SpawnProjectile(target);
+            ammoCount--;
+            ShowFirePS();
+            StartCoroutine(DOReload());
+        }
+
+        private void SpawnProjectile(ITarget target)
+        {
             GameObject projectileObj = Instantiate(
-                projectilePrefab,
-                projectileSpawnPoint.position,
-                Quaternion.FromToRotation(Vector3.up, (GetDirection(target.GetPosition())))
-            );
+                            projectilePrefab,
+                            projectileSpawnPoint.position,
+                            Quaternion.FromToRotation(Vector3.up, (GetDirection(target.GetPosition())))
+                        );
 
             var projectile = projectileObj.GetComponent<Projectile>();
             projectile.SetTarget(target);
@@ -135,9 +156,6 @@ namespace Defense
             projectile.Player = Player;
             projectile.TargetProvider = this.targetProvider;
             Player.AddUnit(projectile);
-            ammoCount--;
-            ShowFirePS();
-            StartCoroutine(DOReload());
         }
 
         /// <summary>
@@ -164,15 +182,8 @@ namespace Defense
         private IEnumerator DOReload()
         {
             weaponState = WeaponState.Reloading;
-
             float recoilTime = Mathf.Clamp(reloadTime / 2f, 0, .5f);
             var defaultPos = barrel.transform.localPosition.z;
-
-            //Sequence barrelSequence = DOTween.Sequence()
-            //    .Append(barrel.transform.DOLocalMoveZ(defaultPos - .005f, recoilTime).SetEase(Ease.OutExpo))
-            //    .Append(barrel.transform.DOLocalMoveZ(defaultPos, recoilTime).SetEase(Ease.InExpo));
-            //;
-
             yield return new WaitForSeconds(reloadTime);
             weaponState = WeaponState.Ready;
         }

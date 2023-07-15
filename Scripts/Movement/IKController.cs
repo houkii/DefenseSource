@@ -8,7 +8,6 @@ namespace Defense
     public class IKController : MonoBehaviour
     {
         [SerializeField] Transform target;
-
         [SerializeField] private float speed = 5f;
         [SerializeField] private float maxReach;
         private Transform limb;
