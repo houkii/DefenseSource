@@ -68,7 +68,6 @@ namespace Defense
             isFighting = true;
             target.Hit(this);
             yield return new WaitForSeconds(hitPeriod);
-            yield return new WaitForEndOfFrame();
             isFighting = false;
         }
     }

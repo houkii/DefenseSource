@@ -27,7 +27,7 @@ namespace Defense
                 var distanceToTarget = Vector3.Distance(transform.position, turret.Target.GetPosition());
                 if (distanceToTarget < turret.SearchRange && distanceToTarget > turret.Range)
                 {
-                    Move(turret.Target, Time.fixedDeltaTime);
+                    Move(turret.Target, Time.deltaTime);
                 }
             }
         }
