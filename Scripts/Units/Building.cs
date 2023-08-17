@@ -10,15 +10,6 @@ namespace Defense
             base.Awake();
             resetTargetEachFrame = false;
         }
-
-        public override HitInfo GetHitInfo()
-        {
-            return new HitInfo { 
-                damage = 0, 
-                owner = this, 
-                player = (IPlayer)Player 
-            };
-        }
     }
 }
 

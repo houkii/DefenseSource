@@ -11,17 +11,15 @@ namespace Defense
         [SerializeField] float hitPeriod = 1f;
         protected bool isFighting = false;
         private IMover mover;
-        private Rigidbody rb;
 
         public override HitInfo GetHitInfo()
         {
-            return new HitInfo { damage = 1f, owner = this, player = (IPlayer)Player };
+            return new HitInfo { damage = 1f, owner = this, player = Player };
         }
 
         protected override void Awake()
         {
             base.Awake();
-            rb = GetComponent<Rigidbody>();
             CanBeTargeted = true;
             mover = gameObject.AddComponent<Mover>();
         }

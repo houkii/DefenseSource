@@ -10,10 +10,8 @@ namespace Defense
     public class Floor : MonoBehaviour
     {
         [SerializeField] private float indicatorScaler = 1.4f;
-        private RangedUnit[] objectsWithRange;
         private Material material;
         private List<IndicatorEntry> indicators;
-        private int previousFrameIndicatorsCount = 0;
         private int currentFrameIndicatorsCount;
 
         private void Awake()
@@ -68,10 +66,6 @@ namespace Defense
 
         private void SetMaterialParams()
         {
-            //currentFrameIndicatorsCount = indicators.Count >= previousFrameIndicatorsCount
-            //    ? indicators.Count
-            //    : previousFrameIndicatorsCount;
-
             currentFrameIndicatorsCount = 128;
 
             Vector4[] positions = new Vector4[currentFrameIndicatorsCount];
@@ -92,7 +86,6 @@ namespace Defense
                     ranges[i] = 0;
                 }
             }
-            previousFrameIndicatorsCount = indicators.Count;
             material.SetFloatArray("_Ranges", ranges);
             material.SetVectorArray("_Positions", positions);
         }

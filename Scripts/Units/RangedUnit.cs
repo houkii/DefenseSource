@@ -52,7 +52,7 @@ namespace Defense
             CanBeTargeted = true;
             this.Parent = this;
             shootCoroutine = StartCoroutine(DOShoot());
-            Target = new NullTarget();
+            SetTarget(new NullTarget());
         }
 
         public override void ResetTarget()
@@ -167,7 +167,7 @@ namespace Defense
                 state = TurretState.Active;
                 yield return new WaitUntil(() => state == TurretState.TargetLocked && weaponState == WeaponState.Ready);
                 Shoot(Target);
-                Target = new NullTarget();
+                SetTarget(new NullTarget());
             }
         }
 
@@ -178,8 +178,6 @@ namespace Defense
         private IEnumerator DOReload()
         {
             weaponState = WeaponState.Reloading;
-            float recoilTime = Mathf.Clamp(reloadTime / 2f, 0, .5f);
-            var defaultPos = barrel.transform.localPosition.z;
             yield return new WaitForSeconds(reloadTime);
             weaponState = WeaponState.Ready;
         }

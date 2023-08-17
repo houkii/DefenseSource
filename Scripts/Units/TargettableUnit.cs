@@ -19,7 +19,6 @@
     public abstract class TargettableUnit : TargettingUnit, IHitable
     {
         public event Action<HitInfo> OnTargetHit;
-        public Action OnTargetExpired { get; set; }
         public bool CanBeTargeted { get; set; }
         public float Health => health;
 

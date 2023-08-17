@@ -24,7 +24,7 @@ namespace Defense
             { 
                 owner = Parent, 
                 damage = Random.Range(damageRange.x, damageRange.y), 
-                player = (IPlayer)Player 
+                player = Player 
             };
         }
 

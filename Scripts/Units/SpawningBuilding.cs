@@ -11,11 +11,11 @@ namespace Defense
     public class SpawningBuilding : Building
     {
         [SerializeField] private GameObject prefab;
-        [SerializeField] float tick = 2;
-        [SerializeField] int maxUnits = 5;
-        [SerializeField] int numPerTick = 1;
-        [SerializeField] private UnitType unitType;
+        [SerializeField] private float tick = 2;
+        [SerializeField] private int maxUnits = 5;
+        [SerializeField] private int numPerTick = 1;
         [SerializeField] private int numUnits = 0;
+        [SerializeField] private UnitType unitType;
 
         [Inject] private EntityViews entityViews;
         [Inject] private HitIndicators hitIndicators;
@@ -73,8 +73,7 @@ namespace Defense
 
             if (unit is TargettingUnit)
             {
-                ITarget target = Utils.GetTarget(this.Player.targetProvider.Targets, unitCtrl.transform.position, 100);
-                (unitCtrl as TargettingUnit).SetTarget(target);
+                (unitCtrl as TargettingUnit).ResetTarget();
             }
         }
     }

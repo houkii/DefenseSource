@@ -1,6 +1,5 @@
 namespace Defense
 {
-    using System;
     using UnityEngine;
 
     /// <summary>
@@ -8,7 +7,6 @@ namespace Defense
     /// </summary>
     public interface ITarget
     {
-        Action OnTargetExpired { get; set; }
         Vector3 GetPosition();
         bool CanBeTargeted { get; set; }
         bool IsRealTarget => !(this is NullTarget);
@@ -20,7 +18,6 @@ namespace Defense
     /// </summary>
     public class NullTarget : ITarget
     {
-        public Action OnTargetExpired { get; set; }
         public bool CanBeTargeted { get; set; }
 
         public Vector3 GetPosition()

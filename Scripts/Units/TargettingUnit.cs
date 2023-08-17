@@ -20,7 +20,6 @@ namespace Defense
         ITargetter Parent { get; }
         ITarget Target { get; }
         void SetTarget(ITarget target);
-        void SetParent(ITargetter targetter);
         void ResetTarget();
         HitInfo GetHitInfo();
     }
@@ -31,7 +30,7 @@ namespace Defense
     public abstract class TargettingUnit : Unit, ITargetter
     {
         public ITargetter Parent { get; set; }
-        public ITarget Target { get; protected set; } = new NullTarget();
+        public ITarget Target { get; private set; } = new NullTarget();
 
         // Should depend on currently used controller (ai, player, unit type) on targetting object.
         [SerializeField] protected bool resetTargetEachFrame;
@@ -39,11 +38,6 @@ namespace Defense
         protected virtual void Awake()
         {
             ResetTarget();
-        }
-
-        public virtual void SetParent(ITargetter targetter)
-        {
-            Parent = targetter;
         }
 
         public virtual void SetTarget(ITarget target)
@@ -63,7 +57,7 @@ namespace Defense
             { 
                 damage = 0,
                 owner = this,
-                player = (IPlayer)Player
+                player = Player
             };
         }
 

@@ -24,7 +24,7 @@
                 {
                     Kill(new DestructionData
                     {
-                        killer = (IPlayer)Player,
+                        killer = Player,
                         type = DestructionType.Destroy
                     });
 
